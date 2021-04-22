@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+
 namespace ProblematicProblem
 {
     class Program
@@ -11,9 +12,18 @@ namespace ProblematicProblem
 
         static void Main(string[] args)
         {
-
+            
             Console.Write("Hello, welcome to the random activity generator! \nWould you like to generate a random activity? yes/no: ");
-            bool cont = Convert.ToBoolean(Console.ReadLine().ToString().ToLower());
+            bool cont;
+            if(Console.ReadLine().ToLower() == "yes")
+            {
+                cont = true;
+            }
+            else
+            {
+                cont = false;
+            }                
+                
 
             Console.WriteLine();
 
@@ -23,12 +33,20 @@ namespace ProblematicProblem
             Console.WriteLine();
 
             Console.Write("What is your age? ");
-            int userAge = int.Parse(Console.ReadLine().ToString());
+            int userAge = int.Parse(Console.ReadLine());
 
             Console.WriteLine();
 
             Console.Write("Would you like to see the current list of activities? Sure/No thanks: ");
-            bool seeList = Convert.ToBoolean(Console.ReadLine().ToString().ToLower());
+            bool seeList;
+            if (Console.ReadLine().ToLower() == "sure")
+            {
+                seeList = true;
+            }
+            else
+            {
+                seeList = false;
+            }
 
 
             if (seeList)
@@ -42,7 +60,15 @@ namespace ProblematicProblem
 
                 Console.WriteLine();
                 Console.Write("Would you like to add any activities before we generate one? yes/no: ");
-                bool addToList = Convert.ToBoolean(Console.ReadLine().ToString().ToLower());
+                bool addToList;
+                if (Console.ReadLine().ToLower() == "yes")
+                {
+                    addToList = true;
+                }
+                else
+                {
+                    addToList = false;
+                }
                 Console.WriteLine();
 
                 while (addToList)
@@ -60,7 +86,14 @@ namespace ProblematicProblem
 
                     Console.WriteLine();
                     Console.WriteLine("Would you like to add more? yes/no: ");
-                    addToList = Convert.ToBoolean(Console.ReadLine().ToString().ToLower());
+                    if (Console.ReadLine().ToLower() == "yes")
+                    {
+                        addToList = true;
+                    }
+                    else
+                    {
+                        addToList = false;
+                    }
                 }
             }
 
@@ -83,11 +116,13 @@ namespace ProblematicProblem
                     Console.Write(". ");
                     Thread.Sleep(500);
                 }
-
+                
                 Console.WriteLine();
 
-                int randomNumber = rng.Next(activities.Count);
+                var rng = new Random();
 
+                var randomNumber = rng.Next(activities.Count);
+                
                 string randomActivity = activities[randomNumber];
 
                 if (userAge > 21 && randomActivity == "Wine Tasting")
@@ -102,9 +137,17 @@ namespace ProblematicProblem
                     randomActivity = activities[randomNumber];
                 };
 
-                Console.Write($"Ah got it! {randomActivity}, your random activity is: {userName}! Is this ok or do you want to grab another activity? Keep/Redo: ");
+                Console.Write($"{userName}, Ah got it!, your random activity is: {randomActivity}! Is this ok or do you want to grab another activity? Keep/Redo: ");
+                if (Console.ReadLine().ToLower() == "keep")
+                {
+                    cont = true;
+                }
+                else
+                {
+                    cont = false;
+                }
                 Console.WriteLine();
-                cont = Convert.ToBoolean(Console.ReadLine().ToString().ToLower());
+                
             }
         }
     }
